@@ -17,7 +17,7 @@ pokedex=[
 			{'name':'Raichu', 'type':'electric', 'info': 'Its long tail serves as a ground to protect itself from its own high-voltage power.'},
 			{'name':'Sandshrew', 'type':'ground', 'info': 'It loves to bathe in the grit of dry, sandy areas.Rids itself of dirt and moisture clinging to its body by sand bathing.'},
 			{'name':'Sandslash', 'type':'ground', 'info': 'The drier the area Sandslash lives in, the harder and smoother the Pokémon’s spikes will feel when touched'},
-			{'name':'Mach', 'type':'fighting', 'info': 'Its whole body is composed of muscles. Even though it’s the size of a human child, it can hurl 100 grown-ups.'},
+			{'name':'Machop', 'type':'fighting', 'info': 'Its whole body is composed of muscles. Even though it’s the size of a human child, it can hurl 100 grown-ups.'},
 			{'name':'Machoke', 'type':'fighting', 'info': 'Its muscular body is so powerful, it must wear a power-save belt to be able to regulate its motions.'},
 			{'name':'Machamp', 'type':'fighting', 'info': 'With four arms that react more quickly than it can think, it can execute many punches at once.'},
 			{'name':'Gastly', 'type':'ghost', 'info': 'Born from gases, anyone would faint if engulfed by its gaseous body, which contains poison.'},
