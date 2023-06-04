@@ -8,7 +8,9 @@ const App = () => {
   return (
     <>
       <main className='w-screen min-h-screen bg-primary'>
-        <Search onSearch={handleSearch} />
+        <div className="flex justify-evenly md:justify-end items-center md:items-end h-[100px] md:px-[50px]">
+          <Search onSearch={handleSearch} />
+        </div>
       </main>
     </>
   )
