@@ -1,8 +1,11 @@
+import Search from '@components/Search'
+
 const App = () => {
   return (
-    <h1 className="text-red-500">
-      Pokédex
-    </h1>
+    <>
+      <main className="w-screen min-h-screen bg-primary">
+        <Search />
+      </main>
   )
 }
 
