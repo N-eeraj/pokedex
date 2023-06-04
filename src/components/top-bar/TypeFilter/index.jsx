@@ -1,6 +1,11 @@
 import { useState } from 'react'
 
+import Type from '@components/top-bar/TypeFilter/Type'
+
+import typeDetails from '@/typeDetails'
 import FilterIcon from '@icons/UI/filter.svg'
+
+const typeNames = Object.keys(typeDetails)
 
 const TypeFilter = () => {
   const [showTypeFilter, setshowTypeFilter] = useState(false)
@@ -23,6 +28,16 @@ const TypeFilter = () => {
         onClick={toggleTypeFilter} />
 
       <div className={`fixed top-0 ${showTypeFilter ? 'right-0' : '-right-full md:-right-[600px]'} w-full md:w-[600px] h-screen bg-primary z-10 duration-500`}>
+
+      {
+        typeNames.map(type => (
+          <Type
+            type={type}
+            key={type}
+            />
+        ))
+      }
+
       </div>
     </>
   )
