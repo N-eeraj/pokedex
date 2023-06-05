@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import Type from '@components/Type'
 
@@ -11,8 +11,24 @@ const typeNames = Object.keys(typeDetails)
 
 const TypeFilter = () => {
   const [showTypeFilter, setshowTypeFilter] = useState(false)
+  const [selectedTypes, setSelectedTypes] = useState([])
 
   const toggleTypeFilter = () => setshowTypeFilter(prevValue => !prevValue)
+
+  const handleToggle = type => {
+    if (selectedTypes.includes(type))
+      setSelectedTypes(prevValue => prevValue.filter(selectedType => selectedType !== type))
+    else
+      setSelectedTypes(prevValue => [...prevValue, type])
+  }
+
+  const clearSelectedTypes = () => {
+    setSelectedTypes([])
+  }
+
+  const applyTypeFilter = () => {
+    console.log(selectedTypes)
+  }
 
   return (
     <>
@@ -42,10 +58,14 @@ const TypeFilter = () => {
             </span>
           </div>
           <div className="absolute md:relative left-0 bottom-0 flex md:gap-x-[25px] w-full md:w-auto">
-            <button className="w-1/2 md:w-auto text-white">
+            <button
+              className="w-1/2 md:w-auto text-white"
+              onClick={clearSelectedTypes}>
               Clear
             </button>
-            <button className="w-1/2 md:w-[125px] h-8 bg-secondary text-white md:rounded-3xl">
+            <button
+              className="w-1/2 md:w-[125px] h-8 bg-secondary text-white md:rounded-3xl"
+              onClick={applyTypeFilter}>
               Apply
             </button>
           </div>
@@ -55,6 +75,8 @@ const TypeFilter = () => {
           typeNames.map((type, index) => (
             <Type
               type={type}
+              isSelected={selectedTypes.includes(type)}
+              onToggle={() => handleToggle(type)}
               key={index} />
           ))
         }
