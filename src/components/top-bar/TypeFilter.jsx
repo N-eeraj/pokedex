@@ -59,7 +59,7 @@ const TypeFilter = () => {
           </div>
           <div className="absolute md:relative left-0 bottom-0 flex md:gap-x-[25px] w-full md:w-auto">
             <button
-              className="w-1/2 md:w-auto text-white"
+              className="w-1/2 md:w-auto bg-primary text-white"
               onClick={clearSelectedTypes}>
               Clear
             </button>
@@ -71,15 +71,18 @@ const TypeFilter = () => {
           </div>
         </div>
 
-        {
-          typeNames.map((type, index) => (
-            <Type
-              type={type}
-              isSelected={selectedTypes.includes(type)}
-              onToggle={() => handleToggle(type)}
-              key={index} />
-          ))
-        }
+        <div className="grid grid-cols-2 gap-y-[30px] max-h-[calc(100%-112px)] mt-[30px] pb-[30px] overflow-y-auto">
+          {
+            typeNames.map((type, index) => (
+              <Type
+                type={type}
+                isSelected={selectedTypes.includes(type)}
+                onToggle={() => handleToggle(type)}
+                key={index}
+                className="m-auto" />
+            ))
+          }
+        </div>
       </div>
     </>
   )
