@@ -42,7 +42,7 @@ const TypeFilter = () => {
       </button>
 
       <div
-        className={`fixed top-0 left-0 md:w-screen md:h-screen bg-white ${showTypeFilter ? 'opacity-10 z-10 duration-200' : 'opacity-0 -z-10 duration-1000'}`}
+        className={`fixed top-0 left-0 md:w-screen md:h-screen  backdrop-blur-sm ${showTypeFilter ? 'bg-white/10 z-10 duration-200' : 'bg-transparent -z-10 duration-1000'}`}
         onClick={toggleTypeFilter} />
 
       <div className={`fixed top-0 ${showTypeFilter ? 'right-0' : '-right-full md:-right-[600px]'} w-full md:w-[600px] h-screen bg-primary z-10 duration-500`}>
@@ -71,7 +71,7 @@ const TypeFilter = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-y-[30px] max-h-[calc(100%-112px)] mt-[30px] pb-[30px] overflow-y-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-y-[30px] max-h-[calc(100%-112px)] mt-[30px] pb-[30px] overflow-y-auto">
           {
             typeNames.map((type, index) => (
               <Type

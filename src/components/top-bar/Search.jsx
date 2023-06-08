@@ -26,7 +26,7 @@ const Search = ({onSearch}) => {
       <input
         value={searchQuery}
         placeholder="Search Pokémon"
-        className="w-full h-full p-4 bg-transparent text-white placeholder:text-grey outline-none"
+        className="w-full h-full p-4 bg-primary/50 text-white placeholder:text-grey outline-none"
         onChange={updateSearchQuery}
         onKeyUp={handleKeyUp} />
 
