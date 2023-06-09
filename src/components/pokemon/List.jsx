@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
+
+import Card from '@components/pokemon/Card'
 
 const List = ({types}) => {
   const [pokemon, setPokemon] = useState([])
   const [count, setCount] = useState(0)
 
   const fetchFilterByType = () => {
-    console.log('filter by types')
+    console.log(types)
   }
 
   const fetchList = async () => {
@@ -28,7 +30,8 @@ const List = ({types}) => {
 
   return (
     <div className="text-white">
-      {JSON.stringify(pokemon)}
+      { pokemon.map(({name}, index) => <Card pokemon={name} key={index} />) }
+
       {
         (pokemon.length < count) &&
         <button
