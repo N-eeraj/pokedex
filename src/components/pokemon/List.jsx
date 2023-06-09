@@ -30,7 +30,9 @@ const List = ({types}) => {
 
   return (
     <div className="text-white">
-      { pokemon.map(({name}, index) => <Card pokemon={name} key={index} />) }
+      <div className="flex flex-wrap justify-center gap-[10px] md:gap-[25px] p-1">
+        { pokemon.map(({name}, index) => <Card pokemon={name} key={index} />) }
+      </div>
 
       {
         (pokemon.length < count) &&
