@@ -14,7 +14,10 @@ const Search = ({onSearch}) => {
     target.blur()
   }
 
-  const clearSearch = () => setSearchQuery('')
+  const clearSearch = () => {
+    setSearchQuery('')
+    onSearch('')
+  }
 
   const handleSearch = () => {
     if (searchQuery)

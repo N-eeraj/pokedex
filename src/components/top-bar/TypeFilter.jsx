@@ -9,7 +9,7 @@ import CloseIcon from '@icons/UI/clear.svg'
 
 const typeNames = Object.keys(typeDetails)
 
-const TypeFilter = () => {
+const TypeFilter = ({onFilter}) => {
   const [showTypeFilter, setshowTypeFilter] = useState(false)
   const [selectedTypes, setSelectedTypes] = useState([])
 
@@ -22,12 +22,11 @@ const TypeFilter = () => {
       setSelectedTypes(prevValue => [...prevValue, type])
   }
 
-  const clearSelectedTypes = () => {
-    setSelectedTypes([])
-  }
+  const clearSelectedTypes = () => setSelectedTypes([])
 
   const applyTypeFilter = () => {
-    console.log(selectedTypes)
+    onFilter(selectedTypes)
+    toggleTypeFilter()
   }
 
   return (
