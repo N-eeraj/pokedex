@@ -2,17 +2,21 @@ import { useEffect, useState } from 'react'
 
 import Card from '@components/pokemon/Card'
 
+import { fetchPokemonList } from '@hooks/fetchData'
+
 const List = ({types}) => {
   const [pokemon, setPokemon] = useState([])
   const [count, setCount] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   const fetchFilterByType = () => {
     console.log(types)
   }
 
   const fetchList = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${pokemon.length}&limit=16`)
-    const {count, results} = await response.json()
+    setLoading(true)
+    const {count, results} = await fetchPokemonList(pokemon.length)
+    setLoading(false)
     setCount(count)
     setPokemon(prevValue => [...prevValue, ...results])
   }
@@ -25,7 +29,7 @@ const List = ({types}) => {
 
   useEffect(() => {
     handleFetchList()
-  }, [name, types])
+  }, [types])
   
 
   return (
@@ -35,12 +39,20 @@ const List = ({types}) => {
       </div>
 
       {
-        (pokemon.length < count) &&
-        <button
-          className="bg-secondary"
-          onClick={handleFetchList}>
-          Load More
-        </button>
+        loading ?
+        (
+          <div>
+            loading
+          </div>
+        ) :
+        (
+          pokemon.length < count &&
+            <button
+              className="bg-secondary"
+              onClick={handleFetchList}>
+              Load More
+            </button>
+        )
       }
     </div>
   )
