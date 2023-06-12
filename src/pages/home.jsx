@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Search from '@components/top-bar/Search'
 import TypeFilter from '@components/top-bar/TypeFilter'
@@ -6,11 +7,12 @@ import PokemonList from '@components/pokemon/List'
 
 import background from '@images/background.png'
 
-const App = () => {
-  const [searchQuery, setSearchQuery] = useState('')
+const Home = () => {
+  const navigate = useNavigate()
+
   const [filterTypes, setFilterTypes] = useState([])
 
-  const handleSearch = searchQuery => setSearchQuery(searchQuery)
+  const handleSearch = searchQuery => navigate(`/pokemon/${searchQuery.toLowerCase()}`)
 
   const handleTypeFilter = types => setFilterTypes(types)
 
@@ -33,4 +35,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Home

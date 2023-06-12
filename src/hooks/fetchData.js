@@ -5,7 +5,7 @@ const useFetch = async url => {
 
 export const fetchPokemonList = async offset => await useFetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=16`)
 
-export const fetchPokemonCardData = async pokemon => {
+export const fetchPokemonData = async pokemon => {
     const data = await useFetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
     const image = `https://img.pokemondb.net/sprites/home/normal/${pokemon}.png`
     return {
