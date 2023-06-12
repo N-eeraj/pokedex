@@ -3,6 +3,7 @@
 ### 👨‍💻 Tech Used
 - [React](https://react.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [React Router](https://reactrouter.com/en/main)
 
 ### 🌐 API
 **[PokéAPI](https://pokeapi.co/)**
@@ -15,7 +16,7 @@ This is a single page react app (SPA) built using [Vite](https://vitejs.dev/).
 This will start the web app on a port in your local server.
 
 ### ⚙️ Features
-- [ ] List Pokémon
+- [x] List Pokémon
+- [x] Search Pokémon
 - [ ] Show Details of selected Pokémon
-- [ ] Search Pokémon
 - [ ] Filter by Pokémon type
