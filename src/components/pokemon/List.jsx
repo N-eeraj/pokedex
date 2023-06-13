@@ -9,6 +9,11 @@ const List = ({types}) => {
   const [count, setCount] = useState(0)
   const [loading, setLoading] = useState(false)
 
+  const loadClasses = {
+    loaded: 'py-1 px-5 bg-secondary hover:bg-transparent border border-secondary rounded-3xl duration-300',
+    loading: 'w-10 aspect-square border-2 border-secondary rounded-full animate-ping'
+  }
+
   const fetchFilterByType = () => {
     console.log(types)
   }
@@ -30,7 +35,6 @@ const List = ({types}) => {
   useEffect(() => {
     handleFetchList()
   }, [types])
-  
 
   return (
     <div className="text-white">
@@ -38,22 +42,17 @@ const List = ({types}) => {
         { pokemon.map(({name}, index) => <Card pokemon={name} key={index} />) }
       </div>
 
-      {
-        loading ?
-        (
-          <div>
-            loading
-          </div>
-        ) :
-        (
+      <div className="flex justify-center gap-x-3 py-5">
+        {
           pokemon.length < count &&
             <button
-              className="bg-secondary"
+              className={loadClasses[loading ? 'loading' : 'loaded']}
+              disabled={loading}
               onClick={handleFetchList}>
-              Load More
+              {loading ? '' : 'Load More'}
             </button>
-        )
-      }
+        }
+      </div>
     </div>
   )
 }
