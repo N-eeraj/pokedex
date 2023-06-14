@@ -11,8 +11,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <img
       src={background}
       alt="background"
-      className="fixed top-0 left-0 w-screen h-screen object-cover" />
+      className="fixed top-0 left-0 w-screen h-screen object-cover -z-10" />
 
-    <RouterProvider router={router} />
+    <RouterProvider
+      router={router} />
   </>
 )

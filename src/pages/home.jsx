@@ -15,7 +15,7 @@ const Home = () => {
   const handleTypeFilter = types => setFilterTypes(types)
 
   return (
-    <main className="absolute w-screen min-h-screen">
+    <main>
       <div className="flex justify-evenly md:justify-end items-center md:items-end md:gap-x-[30px] h-[100px] mb-[25px] md:px-[50px]">
         <Search onSearch={handleSearch} />
         <TypeFilter onFilter={handleTypeFilter} />

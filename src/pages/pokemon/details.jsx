@@ -1,28 +1,36 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { fetchPokemonData } from '@hooks/fetchData'
+import { fetchPokemonData, fetchPokemonSpeciesData } from '@hooks/fetchData'
 
 const pokemonDetails = () => {
   const params = useParams()
   const navigate = useNavigate()
 
+  const [data, setData] = useState(null)
+
   const loadData = async () => {
     try {
-      const data = await fetchPokemonData(params.pokemon)
-      console.log(data)
+      const details = await fetchPokemonData(params.pokemon)
+      const species = await fetchPokemonSpeciesData(params.pokemon)
+      setData({
+        ...details,
+        ...species
+      })
     }
     catch {
       navigate('/pokemon/not-found')
     }
   }
 
-  useState(() => {
+  useEffect(() => {
     loadData()
   }, [])
 
   return (
-    <div>pokemon-details</div>
+    <div>
+      <span className="text-white"> {JSON.stringify(data)} </span>
+    </div>
   )
 }
 

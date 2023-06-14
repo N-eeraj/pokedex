@@ -13,3 +13,5 @@ export const fetchPokemonData = async pokemon => {
         ...data
     }
 }
+
+export const fetchPokemonSpeciesData = async pokemon => await useFetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
