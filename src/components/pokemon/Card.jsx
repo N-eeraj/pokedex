@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Type from '@components/Type'
 
-import { fetchPokemonData } from '@hooks/fetchData'
+import { fetchDetails } from '@hooks/fetchData'
 import { useCapitalize } from '@hooks/common'
 
 import pokeball from '@images/card-background.svg'
@@ -15,7 +15,7 @@ const Card = ({pokemon}) => {
   const [pokemonImage, setPokemonImage] = useState(null)
 
   const fetchData = async () => {
-    const {types, image} = await fetchPokemonData(pokemon)
+    const {types, image} = await fetchDetails(pokemon)
     setTypes(types.map(({type}) => type.name))
     setPokemonImage(image)
   }
