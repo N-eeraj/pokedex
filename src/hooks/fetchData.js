@@ -24,6 +24,5 @@ export const fetchDetails = async pokemon => {
 export const fetchEvolutionData = async pokemon => {
     const species = await useFetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
     const data = await useFetch(species.evolution_chain.url)
-    const evolutionChain = getEvolutionChain(data.chain)
-    return evolutionChain
+    return getEvolutionChain(data.chain)
 }
