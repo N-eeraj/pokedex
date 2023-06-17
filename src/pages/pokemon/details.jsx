@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import Details from '@components/pokemon/Details'
+import Stats from '@components/stats'
 
 import { fetchDetails, fetchEvolutionData } from '@hooks/fetchData'
 
@@ -19,7 +20,12 @@ const pokemonDetails = () => {
       data.id = String(details.id).padStart(5,"#0000")
       data.image = details.image
       data.types = details.types.map(({type}) => type.name)
-      data.stats = details.stats
+      data.stats = details.stats.map(({stat, base_stat}) => {
+        return {
+          name: stat.name.toUpperCase(),
+          value: base_stat
+        }
+      })
       data.height = `${details.height / 10} m`
       data.weight = `${details.weight / 10} kg`
       data.evolutionChain = await fetchEvolutionData(pokemon)
@@ -35,18 +41,20 @@ const pokemonDetails = () => {
   }, [])
 
   return (
-    <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center md:items-start w-full py-12 md:py-[60px]">
+    <div className="gap-y-5 w-full p-3">
       <Link
         to="/"
-        className="fixed top-3 md:top-5 left-5 text-white hover:text-secondary text-lg font-semibold duration-300">
+        className="self-start text-white hover:text-secondary text-lg font-semibold duration-300">
         Back
       </Link>
 
-      <div className="flex flex-col items-center w-full md:w-1/2">
-        { data && <Details pokemon={pokemon} data={data} /> }
-      </div>
+      <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center md:items-start mt-3">
+        <div className="flex flex-col items-center w-full md:w-1/2">
+          { data && <Details pokemon={pokemon} data={data} /> }
+        </div>
 
-      <div className="w-[90%] md:w-1/2 max-w-[600px] h-full border-2 border-white"></div>
+        <Stats stats={data.stats} />
+      </div>
     </div>
   )
 }
