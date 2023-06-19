@@ -7,7 +7,7 @@ const Details = ({pokemon, data}) => {
   return (
     <div className="flex flex-col md:flex-row items-center gap-5 w-[90%] md:w-auto p-3 bg-white/10 border-2 border-secondary rounded-lg backdrop-blur-sm">
       <div className="relative aspect-square">
-        <span className="absolute right-[90%] text-grey text-4xl origin-right -rotate-90 z-[-1]">
+        <span className="absolute right-[90%] text-white/50 text-4xl origin-right -rotate-90">
           {data.id}
         </span>
         <img

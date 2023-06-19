@@ -25,11 +25,10 @@ const Card = ({pokemon}) => {
   useEffect(() => {
     fetchData()
   }, [])
-  
 
   return (
     <div
-      className="group w-[45%] md:w-[20%] bg-secondary/10 border border-secondary rounded-lg backdrop-blur-[7px] cursor-pointer shadow-md hover:shadow-secondary duration-300"
+      className="group w-[45%] md:w-[20%] bg-secondary/10 border border-secondary rounded-lg backdrop-blur-[7px] cursor-pointer shadow-sm hover:shadow-secondary duration-300"
       onClick={viewPokemon}>
       <div
         style={{backgroundImage: `url(${pokeball})`}}
