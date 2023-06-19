@@ -1,12 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom'
-
-const basename = import.meta.env.BASE_URL
-
 import Home from '@pages/home'
 import PokemonDetails from '@pages/pokemon/details'
 import PokemonNotFound from '@pages/pokemon/not-found'
+import PageNotFound from '@pages/not-found'
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: '/',
     children: [
@@ -26,9 +23,13 @@ const router = createBrowserRouter([
             element: <PokemonDetails />
           }
         ]
+      },
+      {
+        path: '*',
+        element: <PageNotFound />
       }
     ]
   }
-], {basename})
+]
 
-export default router
+export default routes
