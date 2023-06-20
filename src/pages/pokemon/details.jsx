@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import Details from '@components/pokemon/Details'
+import EvolutionChain from '@components/pokemon/evolution/Chain'
 import Stats from '@components/stats'
 
-import { fetchDetails, fetchEvolutionData } from '@hooks/fetchData'
+import { fetchDetails } from '@hooks/fetchData'
 
 const pokemonDetails = () => {
   const params = useParams()
@@ -28,7 +29,6 @@ const pokemonDetails = () => {
       })
       data.height = `${details.height / 10} m`
       data.weight = `${details.weight / 10} kg`
-      data.evolutionChain = await fetchEvolutionData(pokemon)
       setData(data)
     }
     catch {
@@ -48,13 +48,20 @@ const pokemonDetails = () => {
         Back
       </Link>
 
-      <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center md:items-start mt-3">
-        <div className="flex flex-col items-center w-full md:w-1/2">
-          { data && <Details pokemon={pokemon} data={data} /> }
-        </div>
+      {
+        data && (
+          <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center md:items-start mt-3">
+            <div className="flex flex-col items-center w-full md:w-1/2">
+              <Details pokemon={pokemon} data={data} />
+              <div className="text-white">
+                <EvolutionChain pokemon={pokemon} className="mt-5" />
+              </div>
+            </div>
 
-        <Stats stats={data.stats} />
-      </div>
+            <Stats stats={data.stats} />
+          </div>
+        )
+      }
     </div>
   )
 }
