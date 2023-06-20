@@ -51,11 +51,9 @@ const pokemonDetails = () => {
       {
         data && (
           <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center md:items-start mt-3">
-            <div className="flex flex-col items-center w-full md:w-1/2">
+            <div className="flex flex-col items-center w-full md:w-auto">
               <Details pokemon={pokemon} data={data} />
-              <div className="text-white">
-                <EvolutionChain pokemon={pokemon} className="mt-5" />
-              </div>
+              <EvolutionChain pokemon={pokemon} className="mt-5" />
             </div>
 
             <Stats stats={data.stats} />

@@ -20,8 +20,10 @@ const EvolutionChain = ({pokemon, className}) => {
     <>
       {
         evolutionChain &&
-        <div className={`text-white ${className}`}>
-          <EvolvesTo from={evolutionChain.name} to={evolutionChain.evolvesTo} />
+        <div className={`w-full h-full text-white ${className}`}>
+          <EvolvesTo
+            from={evolutionChain.name}
+            to={evolutionChain.evolvesTo} />
         </div>
       }
     </>
