@@ -38,7 +38,7 @@ const pokemonDetails = () => {
 
   useEffect(() => {
     loadData()
-  }, [])
+  }, [pokemon])
 
   return (
     <div className="gap-y-5 w-full p-3">

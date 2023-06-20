@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Type from '@components/Type'
 
@@ -8,6 +9,7 @@ import { useCapitalize } from '@hooks/common'
 import DoubleArrowIcon from '@icons/UI/double-arrow.svg'
 
 const EvolvesTo = ({from, to}) => {
+  const navigate = useNavigate()
   const [pokemon, setPokemon] = useState({})
 
   const loadData = async () => {
@@ -19,14 +21,17 @@ const EvolvesTo = ({from, to}) => {
     })
   }
 
+  const handleClick = () => navigate(`/pokemon/${pokemon.name}`)
+
   useEffect(() => {
     loadData()
   }, [])
 
   return (
-    <div className="flex justify-around items-center">
+    <div className="flex justify-start md:justify-around items-center">
       <div
         className="flex flex-col items-center cursor-pointer"
+        onClick={handleClick}>
         <img
           src={pokemon.image}
           alt={pokemon.name}

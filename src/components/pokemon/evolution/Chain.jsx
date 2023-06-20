@@ -20,7 +20,7 @@ const EvolutionChain = ({pokemon, className}) => {
     <>
       {
         evolutionChain &&
-        <div className={`w-full h-full text-white ${className}`}>
+        <div className={`w-full h-full text-white overflow-x-auto ${className}`}>
           <EvolvesTo
             from={evolutionChain.name}
             to={evolutionChain.evolvesTo} />
