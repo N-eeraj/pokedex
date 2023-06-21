@@ -19,4 +19,4 @@ This will start the web app on a port in your local server.
 - [x] List Pokémon
 - [x] Search Pokémon
 - [x] Show Details of selected Pokémon
-- [ ] Filter by Pokémon type
+- [x] Filter by Pokémon type

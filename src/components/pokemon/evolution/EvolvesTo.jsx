@@ -56,11 +56,11 @@ const EvolvesTo = ({from, to}) => {
             {to.map(({name, evolvesTo}, index) => (
               <div
                 key={index}
-                className="relative">
+                className="flex">
                 <img
                   src={DoubleArrowIcon}
                   alt="Evolves to"
-                  className="absolute top-1/2 right-full" />
+                  className="w-10" />
 
                 <EvolvesTo
                   from={name}
