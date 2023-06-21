@@ -12,6 +12,14 @@ const getEvolutionChain = evolutionChain => {
 
 export const fetchPokemonList = async offset => await useFetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=16`)
 
+export const fetchTypePokemonList = async type => {
+    const { pokemon } = await useFetch(`https://pokeapi.co/api/v2/type/${type}`)
+    return {
+        results: pokemon.map(({pokemon}) => pokemon),
+        count: pokemon.length
+    }
+}
+
 export const fetchDetails = async pokemon => {
     const data = await useFetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
     const image = `https://img.pokemondb.net/sprites/home/normal/${pokemon}.png`
