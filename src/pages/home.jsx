@@ -8,11 +8,11 @@ import PokemonList from '@components/pokemon/List'
 const Home = () => {
   const navigate = useNavigate()
 
-  const [filterTypes, setFilterTypes] = useState([])
+  const [filterType, setFilterType] = useState(null)
 
   const handleSearch = searchQuery => navigate(`/pokemon/${searchQuery.toLowerCase()}`)
 
-  const handleTypeFilter = types => setFilterTypes(types)
+  const handleTypeFilter = type => setFilterType(type)
 
   return (
     <main>
@@ -21,7 +21,7 @@ const Home = () => {
         <TypeFilter onFilter={handleTypeFilter} />
       </div>
 
-      <PokemonList types={filterTypes} />
+      <PokemonList type={filterType} />
     </main>
   )
 }

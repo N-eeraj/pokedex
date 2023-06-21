@@ -4,7 +4,7 @@ import Card from '@components/pokemon/Card'
 
 import { fetchPokemonList } from '@hooks/fetchData'
 
-const List = ({types}) => {
+const List = ({type}) => {
   const [pokemon, setPokemon] = useState([])
   const [count, setCount] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -15,7 +15,7 @@ const List = ({types}) => {
   }
 
   const fetchFilterByType = () => {
-    console.log(types)
+    console.log(type)
   }
 
   const fetchList = async () => {
@@ -27,14 +27,14 @@ const List = ({types}) => {
   }
 
   const handleFetchList = () => {
-    if (types.length)
+    if (type)
       return fetchFilterByType()
     fetchList()
   }
 
   useEffect(() => {
     handleFetchList()
-  }, [types])
+  }, [type])
 
   return (
     <div className="text-white">

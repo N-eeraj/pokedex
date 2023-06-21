@@ -11,21 +11,21 @@ const typeNames = Object.keys(typeDetails)
 
 const TypeFilter = ({onFilter}) => {
   const [showTypeFilter, setshowTypeFilter] = useState(false)
-  const [selectedTypes, setSelectedTypes] = useState([])
+  const [selectedType, setSelectedType] = useState(null)
 
   const toggleTypeFilter = () => setshowTypeFilter(prevValue => !prevValue)
 
   const handleToggle = type => {
-    if (selectedTypes.includes(type))
-      setSelectedTypes(prevValue => prevValue.filter(selectedType => selectedType !== type))
+    if (selectedType == type)
+      setSelectedType(null)
     else
-      setSelectedTypes(prevValue => [...prevValue, type])
+      setSelectedType(type)
   }
 
-  const clearSelectedTypes = () => setSelectedTypes([])
+  const clearSelectedType = () => setSelectedType(null)
 
   const applyTypeFilter = () => {
-    onFilter(selectedTypes)
+    onFilter(selectedType)
     toggleTypeFilter()
   }
 
@@ -59,7 +59,7 @@ const TypeFilter = ({onFilter}) => {
           <div className="absolute md:relative left-0 bottom-0 flex md:gap-x-[25px] w-full md:w-auto">
             <button
               className="w-1/2 md:w-auto bg-primary text-white"
-              onClick={clearSelectedTypes}>
+              onClick={clearSelectedType}>
               Clear
             </button>
             <button
@@ -75,7 +75,7 @@ const TypeFilter = ({onFilter}) => {
             typeNames.map((type, index) => (
               <Type
                 type={type}
-                isSelected={selectedTypes.includes(type)}
+                isSelected={selectedType === type}
                 onToggle={() => handleToggle(type)}
                 key={index}
                 className="m-auto" />
