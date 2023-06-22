@@ -1,6 +1,10 @@
+import NotFound from "@components/NotFound"
+
 const notFound = () => {
   return (
-    <div>notFound</div>
+    <NotFound
+      message="Pokemon not found"
+      image="https://img.pokemondb.net/sprites/home/normal/ditto.png" />
   )
 }
 

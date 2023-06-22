@@ -1,8 +1,10 @@
+import NotFound from "@components/NotFound"
+
 const notFound = () => {
   return (
-    <div>
-        Error 404
-    </div>
+    <NotFound
+      message="Page not found"
+      image="https://img.pokemondb.net/sprites/home/normal/luxio.png" />
   )
 }
 
