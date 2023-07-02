@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
 import Card from '@components/pokemon/Card'
 
+import { AppContext } from '@/App'
 import { fetchPokemonList, fetchTypePokemonList } from '@hooks/fetchData'
 
 const List = ({type}) => {
@@ -9,6 +10,7 @@ const List = ({type}) => {
   const [pokemon, setPokemon] = useState([])
   const [count, setCount] = useState(0)
   const [loading, setLoading] = useState(false)
+  const {typeList, setTypeList} = useContext(AppContext)
 
   const loadClasses = {
     loaded: 'py-1 px-5 bg-secondary hover:bg-transparent border border-secondary rounded-3xl duration-300',
@@ -16,16 +18,27 @@ const List = ({type}) => {
   }
 
   const fetchFilterByType = async () => {
-    if (data.value.length) {
-      setPokemon(prevValue => [...prevValue, ...data.value.slice(pokemon.length, pokemon.length + 16)])
+    if (data.current.length) {
+      setPokemon(prevValue => [
+        ...prevValue,
+        ...data.current.slice(pokemon.length, pokemon.length + 16)
+      ])
     }
     else {
-      setLoading(true)
-      const {count, results} = await fetchTypePokemonList(type)
-      setLoading(false)
-      setCount(count)
-      data.value = results
-      setPokemon(data.value.slice(0, 16))
+      let details = typeList[type]
+      if (!details) {
+        setLoading(true)
+        details = await fetchTypePokemonList(type)
+        setTypeList(prevValue => {
+          const newValue = prevValue
+          newValue[type] = { count: details.count, results: details.results }
+          return newValue
+        })
+        setLoading(false)
+      }
+      setCount(details.count)
+      data.current = details.results
+      setPokemon(data.current.slice(0, 16))
     }
   }
 
@@ -44,7 +57,7 @@ const List = ({type}) => {
   }
 
   useEffect(() => {
-    data.value = []
+    data.current = []
     setPokemon([])
     handleFetchList()
   }, [type])

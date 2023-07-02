@@ -41,7 +41,7 @@ const Card = ({pokemon}) => {
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [pokemon])
 
   return (
     <div
