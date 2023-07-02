@@ -1,15 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import EvolvesTo from '@components/pokemon/evolution/EvolvesTo'
 
+import { AppContext } from '@/App'
 import { fetchEvolutionData } from '@hooks/fetchData'
 
 const EvolutionChain = ({pokemon, className}) => {
-  const [evolutionChain, setEvolutionChain] = useState(null)
+  const [chain, setChain] = useState(null)
+  const { pokemonData, setPokemonData } = useContext(AppContext)
 
   const fetchChain = async () => {
-    const chain = await fetchEvolutionData(pokemon)
-    setEvolutionChain(chain)
+    let evolutionChain
+    const cachedData = pokemonData[pokemon]?.evolutionChain
+    if (cachedData) {
+      evolutionChain = cachedData
+    }
+    else {
+      evolutionChain = await fetchEvolutionData(pokemon)
+      setPokemonData(prevValue => {
+        const newValue = prevValue
+        newValue[pokemon] = {
+          evolutionChain,
+          ...newValue[pokemon]
+        }
+        return newValue
+      })
+    }
+    setChain(evolutionChain)
   }
 
   useEffect(() => {
@@ -19,11 +36,11 @@ const EvolutionChain = ({pokemon, className}) => {
   return (
     <>
       {
-        evolutionChain &&
+        chain &&
         <div className={`w-full h-full text-white overflow-x-auto ${className}`}>
           <EvolvesTo
-            from={evolutionChain.name}
-            to={evolutionChain.evolvesTo} />
+            from={chain.name}
+            to={chain.evolvesTo} />
         </div>
       }
     </>

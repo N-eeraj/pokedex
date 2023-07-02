@@ -1,3 +1,4 @@
+import App from '@/App'
 import Home from '@pages/home'
 import PokemonDetails from '@pages/pokemon/details'
 import PokemonNotFound from '@pages/pokemon/not-found'
@@ -6,6 +7,7 @@ import PageNotFound from '@pages/not-found'
 const routes = [
   {
     path: '/',
+    element: <App />,
     children: [
       {
         path: '',

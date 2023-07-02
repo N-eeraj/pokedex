@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Type from '@components/Type'
 
+import { AppContext } from '@/App'
 import { fetchDetails } from '@hooks/fetchData'
 import { useCapitalize } from '@hooks/common'
 
@@ -11,13 +12,29 @@ import DoubleArrowIcon from '@icons/UI/double-arrow.svg'
 const EvolvesTo = ({from, to}) => {
   const navigate = useNavigate()
   const [pokemon, setPokemon] = useState({})
+  const { pokemonData, setPokemonData } = useContext(AppContext)
 
   const loadData = async () => {
-    const { image, types } = await fetchDetails(from)
+    let details
+    const cachedData = pokemonData[from]?.details
+    if (cachedData) {
+      details = cachedData
+    }
+    else {
+      details = await fetchDetails(from)
+      setPokemonData(prevValue => {
+        const newValue = prevValue
+        newValue[from] = {
+          details,
+          ...newValue[from]
+        }
+        return newValue
+      })
+    }
     setPokemon({
       name: from,
-      image,
-      types: types.map(({type}) => type.name)
+      image: details.image,
+      types: details.types.map(({type}) => type.name)
     })
   }
 

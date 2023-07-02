@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Type from '@components/Type'
 
+import { AppContext } from '@/App'
 import { fetchDetails } from '@hooks/fetchData'
 import { useCapitalize } from '@hooks/common'
 
@@ -13,11 +14,27 @@ const Card = ({pokemon}) => {
 
   const [types, setTypes] = useState([])
   const [pokemonImage, setPokemonImage] = useState(null)
+  const { pokemonData, setPokemonData } = useContext(AppContext)
 
   const fetchData = async () => {
-    const {types, image} = await fetchDetails(pokemon)
-    setTypes(types.map(({type}) => type.name))
-    setPokemonImage(image)
+    let details
+    const cachedData = pokemonData[pokemon]?.details
+    if (cachedData) {
+      details = cachedData
+    }
+    else {
+      details = await fetchDetails(pokemon)
+      setPokemonData(prevValue => {
+        const newValue = prevValue
+        newValue[pokemon] = {
+          details,
+          ...newValue[pokemon]
+        }
+        return newValue
+      })
+    }
+    setTypes(details.types.map(({type}) => type.name))
+    setPokemonImage(details.image)
   }
 
   const viewPokemon = () => navigate(`/pokemon/${pokemon.toLowerCase()}`)

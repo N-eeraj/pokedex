@@ -1,22 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import Details from '@components/pokemon/Details'
 import EvolutionChain from '@components/pokemon/evolution/Chain'
 import Stats from '@components/stats'
 
+import { AppContext } from '@/App'
 import { fetchDetails } from '@hooks/fetchData'
 
 const pokemonDetails = () => {
   const params = useParams()
   const navigate = useNavigate()
 
-  const pokemon = params.pokemon.toLowerCase()
   const [data, setData] = useState({})
+  const { pokemonData, setPokemonData } = useContext(AppContext)
+  const pokemon = params.pokemon.toLowerCase()
 
   const loadData = async () => {
     try {
-      const details = await fetchDetails(pokemon)
+      let details
+      const cachedData = pokemonData[pokemon]?.details
+      if (cachedData) {
+        details = cachedData
+      }
+      else {
+        details = await fetchDetails(pokemon)
+        setPokemonData(prevValue => {
+          const newValue = prevValue
+          newValue[pokemon] = {
+            details,
+            ...newValue[pokemon]
+          }
+          return newValue
+        })
+      }
       const data = {}
       data.id = String(details.id).padStart(5,"#0000")
       data.image = details.image
