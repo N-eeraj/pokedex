@@ -20,6 +20,4 @@ This will start the web app on a port in your local server.
 - [x] Search Pokémon
 - [x] Show Details of selected Pokémon
 - [x] Filter by Pokémon type
-
-### Additions
-- [ ] Reduce API calls (by storing Pokémon details)
+- [x] Reduce API calls (by storing Pokémon details)
